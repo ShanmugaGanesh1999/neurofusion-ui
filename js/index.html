@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NeuroFusion UI — Multimodal HCI Demo</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <!-- Optional: WebGazer (gaze) and handtrack.js (gesture) for richer sensing
+  <script src="https://webgazer.cs.brown.edu/webgazer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"></script>
+  -->
+</head>
+<body>
+  <header class="app-header" aria-label="Header">
+    <div class="brand">
+      <img src="./assets/logo.svg" alt="" aria-hidden="true" />
+      <span>NeuroFusion UI</span>
+    </div>
+    <nav class="controls">
+      <button id="btn-voice" class="ghost" aria-pressed="false" title="Toggle Voice (mic)">
+        🎙️ Voice
+      </button>
+      <button id="btn-gaze" class="ghost" aria-pressed="false" title="Toggle Gaze">
+        👁️ Gaze
+      </button>
+      <button id="btn-gesture" class="ghost" aria-pressed="false" title="Toggle Gestures (cam)">
+        ✋ Gesture
+      </button>
+      <button id="btn-bci" class="primary" aria-pressed="false" title="Toggle BCI">
+        🧠 BCI
+      </button>
+      <div class="divider"></div>
+      <button id="btn-theme" class="ghost" title="Toggle Theme">🌓 Theme</button>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <aside class="panel left" aria-label="BCI Panel">
+      <h2>BCI Mock</h2>
+      <p class="muted">Simulate neural state (swap with real adapter later).</p>
+      <label>Focus <input id="focus-range" type="range" min="0" max="1" step="0.01" value="0.35" /></label>
+      <label>Stress <input id="stress-range" type="range" min="0" max="1" step="0.01" value="0.20" /></label>
+      <label>Serendipity <input id="serendipity-range" type="range" min="0" max="1" step="0.01" value="0.25" /></label>
+      <div class="row">
+        <button id="intent-select" class="chip" title="Intent: select">Select</button>
+        <button id="intent-cancel" class="chip" title="Intent: cancel">Cancel</button>
+        <button id="intent-search" class="chip" title="Intent: search">Search</button>
+      </div>
+      <div class="status" id="bci-status" aria-live="polite"></div>
+    </aside>
+
+    <section class="content" aria-label="Content">
+      <div class="modes">
+        <span id="mode-badge" class="badge">Mode: Default</span>
+      </div>
+
+      <div class="cards">
+        <article class="card" data-gaze-selectable>
+          <h3>Reader</h3>
+          <p>Adaptive reading: content length and contrast change with cognitive state.</p>
+          <div class="reader" id="reader">
+            <p class="reader-body short">
+              Short view — great for high-stress moments.
+            </p>
+            <p class="reader-body long">
+              Long view — expands when calm & focused, offering deeper context without overwhelming the user.
+            </p>
+          </div>
+        </article>
+
+        <article class="card" data-gaze-selectable>
+          <h3>Creative Canvas</h3>
+          <p>Draw with intent: hold <kbd>Shift</kbd> or say “draw” to sketch. Calm mode softens palette.</p>
+          <canvas id="canvas" width="640" height="360" aria-label="Creative canvas"></canvas>
+          <div class="toolbar">
+            <button id="clear-canvas" class="ghost">Clear</button>
+          </div>
+        </article>
+
+        <article class="card" data-gaze-selectable>
+          <h3>Command Palette <span class="muted">(Ctrl/Cmd + K)</span></h3>
+          <p>Use voice (“open palette”) or keyboard.</p>
+          <div class="palette" id="palette" hidden>
+            <input id="palette-input" type="text" placeholder="Type a command…" aria-label="Command input"/>
+            <ul id="palette-list" role="listbox" aria-label="Suggestions"></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <aside class="panel right" aria-label="Serendipity">
+      <h2>Serendipity</h2>
+      <p class="muted">Occasional, controllable novelty to avoid filter bubbles.</p>
+      <ul id="serendipity-list" class="serendipity"></ul>
+    </aside>
+  </main>
+
+  <div id="gaze-cursor" class="gaze-cursor" hidden aria-hidden="true"></div>
+
+  <footer class="app-footer">
+    <span>Local-first • No tracking • MIT License</span>
+  </footer>
+
+  <script type="module" src="./js/script.js"></script>
+</body>
+</html>
