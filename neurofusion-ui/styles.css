@@ -1,0 +1,205 @@
+/* ---------- CSS Variables ---------- */
+:root {
+  --bg: #0b0c10;
+  --bg-panel: #161821;
+  --bg-elev: #1b1e27;
+  --text: #eaeff7;
+  --muted: #9aa3b2;
+  --accent: #5ab1ff;
+  --accent-2: #8ef0c2;
+  --danger: #ff6b6b;
+  --ok: #3ad29f;
+  --card: #12141b;
+  --border: #242733;
+  --shadow: rgba(0,0,0,.35);
+}
+
+.light {
+  --bg: #f6f8fb;
+  --bg-panel: #ffffff;
+  --bg-elev: #f0f3f8;
+  --text: #111319;
+  --muted: #636c79;
+  --accent: #0066ff;
+  --accent-2: #118d57;
+  --danger: #d92d20;
+  --ok: #118d57;
+  --card: #ffffff;
+  --border: #e3e7ef;
+  --shadow: rgba(0,0,0,.08);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 10% -10%, #172033, transparent),
+              radial-gradient(800px 600px at 90% -20%, #241a3a, transparent),
+              var(--bg);
+  font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+.app-header, .app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: linear-gradient(0deg, var(--bg-panel), var(--bg-elev));
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-footer {
+  position: static;
+  border-top: 1px solid var(--border);
+  border-bottom: none;
+  justify-content: center;
+  background: var(--bg-elev);
+  color: var(--muted);
+  padding: 16px;
+  margin-top: 8px;
+}
+
+.brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px; }
+.brand img { width:24px; height:24px; }
+
+.controls { display:flex; align-items:center; gap:8px; }
+.controls .divider { width:1px; height:24px; background: var(--border); margin: 0 6px; }
+
+button {
+  background: var(--bg-panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: transform .06s ease, background .2s ease, border-color .2s ease;
+  box-shadow: 0 1px 0 var(--shadow);
+}
+button:hover { transform: translateY(-1px); border-color: var(--accent); }
+button:active { transform: translateY(0); }
+button.primary { background: linear-gradient(180deg, var(--accent), #246bfb); border-color: #246bfb; color: white; }
+button.ghost { background: var(--bg-elev); }
+button.chip { padding: 6px 10px; font-size: 12px; }
+
+.badge {
+  display:inline-block;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 300px;
+  gap: 16px;
+  padding: 16px;
+}
+
+.panel {
+  background: linear-gradient(180deg, var(--bg-panel), var(--bg-elev));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  min-height: calc(100vh - 130px);
+  box-shadow: 0 6px 16px var(--shadow);
+}
+
+.panel h2 { margin: 4px 0 8px; }
+.muted { color: var(--muted); font-size: 14px; }
+.row { display:flex; gap:8px; flex-wrap: wrap; margin-top:6px; }
+
+.content {
+  min-width: 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 6px 16px var(--shadow);
+  min-height: 240px;
+}
+
+.reader .reader-body.short { display: block; }
+.reader .reader-body.long { display: none; }
+body.focus .reader .reader-body.long,
+body.calm .reader .reader-body.long { display: block; }
+body.focus .reader .reader-body.short,
+body.calm .reader .reader-body.short { display: none; }
+
+.toolbar { margin-top: 10px; display:flex; gap:8px; }
+
+/* Canvas */
+#canvas {
+  width: 100%;
+  height: auto;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background:
+    linear-gradient(45deg, rgba(255,255,255,.03) 25%, transparent 25%) -10px 0/20px 20px,
+    linear-gradient(-45deg, rgba(255,255,255,.03) 25%, transparent 25%) -10px 0/20px 20px,
+    linear-gradient(45deg, transparent 75%, rgba(255,255,255,.03) 75%) -10px 0/20px 20px,
+    linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.03) 75%) -10px 0/20px 20px;
+}
+
+/* Palette */
+.palette { margin-top: 8px; }
+#palette input {
+  width: 100%; padding: 10px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--bg-elev); color: var(--text);
+}
+#palette-list { list-style: none; padding: 0; margin: 8px 0 0; }
+#palette-list li {
+  padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 6px;
+  display:flex; justify-content: space-between; align-items:center;
+}
+#palette-list li .small { color: var(--muted); font-size: 12px; }
+
+/* Serendipity list */
+.serendipity { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.serendipity li {
+  padding: 10px; border-radius: 10px; background: var(--bg-elev); border: 1px solid var(--border);
+}
+
+/* Mode themes */
+body.focus .panel, body.focus .card { border-color: #0f7bff66; }
+body.calm { background:
+  radial-gradient(1200px 800px at 10% -10%, #1d283a, transparent),
+  radial-gradient(800px 600px at 90% -20%, #1c2f27, transparent),
+  var(--bg); }
+body.calm .badge { background: #1d2922; color: #a6eccc; border-color: #294236; }
+body.calm .panel, body.calm .card { border-color: #3b5d47; }
+body.calm button.primary { background: linear-gradient(180deg, var(--accent-2), #0f7a4f); }
+
+/* Gaze cursor */
+.gaze-cursor {
+  position: fixed; width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--accent); pointer-events: none; transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 0 12px rgba(90,177,255,.5);
+  z-index: 1000;
+}
+
+/* Forms */
+label { display: block; font-size: 14px; margin: 10px 0; }
+input[type="range"] { width: 100%; }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; }
+  .panel { min-height: auto; }
+}
